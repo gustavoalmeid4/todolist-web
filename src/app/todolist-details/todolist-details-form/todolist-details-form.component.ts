@@ -19,28 +19,35 @@ export class TodolistDetailsFormComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    if (this.service.formData.todoId == 0)
-      this.insertRecord(form)
+    if (this.service.formData.id == 0)
+      this.insertRecord(form);
     else
-      this.resetForm(form)
-
-  }
-
-  updateRecord(form: NgForm) {
-
+      this.updateRecord(form);
   }
 
   insertRecord(form: NgForm) {
     this.service.postTodoItem().subscribe(
       res => {
         this.resetForm(form);
+        this.service.refreshlist();
         this.toastr.success('Tarefa cadastrada com sucesso!')
       },
       err => { console.log(err) }
-    );
-  }
+      );
+    }
 
-  resetForm(form: NgForm) {
+    updateRecord(form: NgForm) {
+      this.service.putTodoItem().subscribe(
+        res => {
+          this.resetForm(form);
+          this.service.refreshlist();
+          this.toastr.info('Tarefa alterada com sucesso!')
+        },
+        err => { console.log(err) }
+      );
+    }
+
+    resetForm(form: NgForm) {
     form.form.reset();
     this.service.formData = new TodolistDetail();
   }

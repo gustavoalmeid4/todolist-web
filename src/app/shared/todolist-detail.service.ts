@@ -17,8 +17,12 @@ export class TodolistDetailService {
     return this.http.post(this.baseURL,this.formData)
   }
 
-  putTodoItem(){
-    return this.http.post(`${this.baseURL}/${this.formData.todoId}`,this.formData)
+  putTodoItem() {
+    return this.http.put(`${this.baseURL}/${this.formData.id}`, this.formData);
+  }
+
+  deleteTodoItem(id: number) {
+    return this.http.delete(`${this.baseURL}/${id}`);
   }
 
   refreshlist(){

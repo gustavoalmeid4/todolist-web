@@ -15,6 +15,7 @@
             <thead class="thead-dark">
                 <tr>
                     <th style="width: 125px;">Status Tarefa</th>
+                    <th>ID</th>
                     <th>Tarefa</th>
                     <th>Finalizar</th>
                     <th></th>
@@ -25,12 +26,13 @@
                     <td>
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
                     </td>
-                    <td (click)="populateform(item)"> {{item.todoName}}</td>
+                    <td (click)="populateForm(item)"> {{item.id}}</td>
+                    <td (click)="populateForm(item)"> {{item.todoName}}</td>
                     <td>
-                        <i class="bi bi-check2-circle"></i>
+                        <i (click)="populateForm(item)" class="bi bi-check2-circle"></i>
                     </td>
                     <td>
-                        <i class="bi bi-trash text-danger"></i>
+                        <i class="bi bi-trash text-danger" (click)="onDelete(item.id)"></i>
                     </td>
                 </tr>
             </tbody>
