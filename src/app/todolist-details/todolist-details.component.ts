@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TodolistDetail } from '../shared/todolist-detail.model';
+import { TodolistDetailService } from '../shared/todolist-detail.service';
 
 @Component({
   selector: 'app-todolist-details',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodolistDetailsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public service:TodolistDetailService) { }
 
   ngOnInit(): void {
+    this.service.refreshlist()
   }
 
+
+  populateform(selectedRecord:TodolistDetail){
+    this.service.formData = Object.assign({},selectedRecord);
+  }
 }

@@ -11,8 +11,19 @@ export class TodolistDetailService {
 
   readonly baseURL = 'https://localhost:44326/api/todoitems'
   formData:TodolistDetail = new TodolistDetail()
+  list :TodolistDetail[];
 
   postTodoItem(){
     return this.http.post(this.baseURL,this.formData)
+  }
+
+  putTodoItem(){
+    return this.http.post(`${this.baseURL}/${this.formData.todoId}`,this.formData)
+  }
+
+  refreshlist(){
+    this.http.get(this.baseURL)
+    .toPromise()
+    .then(res => this.list = res as TodolistDetail[])
   }
 }

@@ -11,24 +11,36 @@ import { TodolistDetailService } from 'src/app/shared/todolist-detail.service';
 })
 export class TodolistDetailsFormComponent implements OnInit {
 
-  constructor(public service:TodolistDetailService,
-    private toastr:ToastrService
-    ) { }
+  constructor(public service: TodolistDetailService,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(form:NgForm){
+  onSubmit(form: NgForm) {
+    if (this.service.formData.todoId == 0)
+      this.insertRecord(form)
+    else
+      this.resetForm(form)
+
+  }
+
+  updateRecord(form: NgForm) {
+
+  }
+
+  insertRecord(form: NgForm) {
     this.service.postTodoItem().subscribe(
       res => {
         this.resetForm(form);
         this.toastr.success('Tarefa cadastrada com sucesso!')
       },
-      err => {console.log(err)}
+      err => { console.log(err) }
     );
   }
 
-  resetForm(form:NgForm){
+  resetForm(form: NgForm) {
     form.form.reset();
     this.service.formData = new TodolistDetail();
   }
